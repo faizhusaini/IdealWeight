@@ -11,6 +11,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 
 public class MainActivity extends AppCompatActivity{
 
@@ -114,17 +116,40 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    public double GetIdealWeight(double height)
+    {
+        double idealWeight;
+        double remainInch;
+        if(height<=60)
+        {
+            idealWeight=50;
+        }
+        else
+        {
+            remainInch = (height - 60);
+            idealWeight = 50 + (2.3 * remainInch);//ideal weight for men
 
-
+        }
+        return idealWeight;
+    }
     public void GetBMI(View view)
     {
         float height = seekBar.getProgress();
-        height = height/100;
+        float heightforBMI;
+        heightforBMI = height/100;
         float weight = seekBar2.getProgress();
         System.out.print("height " + height + "  Weight  " + weight);
-        float BMI = weight / (height * height);
+        double heightInInch;
+        double getIdealWeight;
+        heightInInch=height*0.39370;
+        float BMI = weight / (heightforBMI * heightforBMI);
         TextView textView5 = (TextView) findViewById(R.id.textView5);
-        textView5.setText(BMI + "");
+        textView5.setText("BMI: "+BMI + "");
+       getIdealWeight= GetIdealWeight(heightInInch);
+        DecimalFormat df = new DecimalFormat("#.#");
+        getIdealWeight=Double.valueOf(df.format(getIdealWeight));
+        TextView textView6 = (TextView) findViewById(R.id.textView6);
+        textView6.setText("Ideal Weight: "+" "+getIdealWeight + "");
         if(BMI<=18.5) Toast.makeText(getApplicationContext(), "Underweight" , Toast.LENGTH_LONG).show();
         if(BMI>18.5 && BMI<=24.9) Toast.makeText(getApplicationContext(), "Normal Weight" , Toast.LENGTH_LONG).show();
         if(BMI>25 && BMI<=29.9) Toast.makeText(getApplicationContext(), "Overweight" , Toast.LENGTH_LONG).show();
