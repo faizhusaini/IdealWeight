@@ -1,6 +1,5 @@
 package com.example.faiz.idealweight;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,7 +9,6 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.DecimalFormat;
 
 
@@ -136,24 +134,25 @@ public class MainActivity extends AppCompatActivity{
     {
         float height = seekBar.getProgress();
         float heightforBMI;
-        heightforBMI = height/100;
+        heightforBMI = height/100;// this variable will be used in calculating BMI as it has to be converted in mm.
         float weight = seekBar2.getProgress();
         System.out.print("height " + height + "  Weight  " + weight);
         double heightInInch;
         double getIdealWeight;
-        heightInInch=height*0.39370;
+        heightInInch=height*0.39370;//converting height in inches
         float BMI = weight / (heightforBMI * heightforBMI);
-        TextView textView5 = (TextView) findViewById(R.id.textView5);
-        textView5.setText("BMI: "+BMI + "");
-       getIdealWeight= GetIdealWeight(heightInInch);
         DecimalFormat df = new DecimalFormat("#.#");
+        BMI= Float.valueOf(df.format(BMI));
+        TextView textView5 = (TextView) findViewById(R.id.textView5);
+        textView5.setText("BMI: "+"\n"+BMI + "");
+       getIdealWeight= GetIdealWeight(heightInInch);
         getIdealWeight=Double.valueOf(df.format(getIdealWeight));
         TextView textView6 = (TextView) findViewById(R.id.textView6);
-        textView6.setText("Ideal Weight: "+" "+getIdealWeight + "");
-        if(BMI<=18.5) Toast.makeText(getApplicationContext(), "Underweight" , Toast.LENGTH_LONG).show();
-        if(BMI>18.5 && BMI<=24.9) Toast.makeText(getApplicationContext(), "Normal Weight" , Toast.LENGTH_LONG).show();
-        if(BMI>25 && BMI<=29.9) Toast.makeText(getApplicationContext(), "Overweight" , Toast.LENGTH_LONG).show();
-        if(BMI>=30) Toast.makeText(getApplicationContext(), "Obese" , Toast.LENGTH_LONG).show();
+        textView6.setText("Ideal Weight:\n "+" "+getIdealWeight + "");
+        if(BMI<=18.5) Toast.makeText(getApplicationContext(), "Underweight" , Toast.LENGTH_SHORT).show();
+        if(BMI>18.5 && BMI<=24.9) Toast.makeText(getApplicationContext(), "Normal Weight" , Toast.LENGTH_SHORT).show();
+        if(BMI>25 && BMI<=29.9) Toast.makeText(getApplicationContext(), "Overweight" , Toast.LENGTH_SHORT).show();
+        if(BMI>=30) Toast.makeText(getApplicationContext(), "Obese" , Toast.LENGTH_SHORT).show();
 
     }
 
