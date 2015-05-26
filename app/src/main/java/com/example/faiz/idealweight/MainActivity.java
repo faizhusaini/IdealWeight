@@ -30,18 +30,18 @@ public class MainActivity extends AppCompatActivity{
 
         seekBar2 = (SeekBar) findViewById(R.id.seekBar2);
         textView2 = (TextView) findViewById(R.id.textView2);
-        textView.setText(seekBar.getProgress() + "/" + seekBar.getMax());
-        textView2.setText(seekBar2.getProgress() + "/" + seekBar2.getMax());
+        textView.setText("Height(cm):\n"+seekBar.getProgress() + "/" + seekBar.getMax());
+        textView2.setText("Weight(Kg):\n"+seekBar2.getProgress() + "/" + seekBar2.getMax());
         seekBar.setOnSeekBarChangeListener(
 
                 new SeekBar.OnSeekBarChangeListener() {
-                    int progress = 0;
+                    int progress = 10;
                     @Override
                     public void onProgressChanged(SeekBar seekBar,
 
                                                   int progresValue, boolean fromUser) {
                         progress = progresValue;
-                        textView.setText(progress + "");
+                        textView.setText("Height(cm):\n"+progress + "");
 
                     }
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity{
                                                   int progresValue, boolean fromUser) {
                         progress = progresValue;
                         //Integer Getprog = seekBar2.getProgress();
-                        textView2.setText(progress + "");
+                        textView2.setText("Weight(Kg):\n"+progress + "");
                     }
 
                     @Override
